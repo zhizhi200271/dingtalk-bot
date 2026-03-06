@@ -52,7 +52,17 @@
 <section class="panel panel-preview">
   <div class="panel-header">
     👁️ 预览区
-    <span id="canvas-info">已放置: 0个素材</span>
+            <!-- 场景管理栏 -->
+            <div class="scene-manager">
+                <div class="scene-tabs" id="sceneTabs">
+                    <!-- 场景Tab会动态生成 -->
+                </div>
+                <button class="btn-add-scene" id="addSceneBtn">+ 新场景</button>
+                <div class="save-indicator" id="saveIndicator">
+                    <span class="save-dot"></span>
+                    <span class="save-text">已保存</span>
+                </div>
+            </div>    <span id="canvas-info">已放置: 0个素材</span>
   </div>
   <div class="panel-body preview-canvas" id="drop-zone">
     <div class="canvas-placeholder" id="placeholder">

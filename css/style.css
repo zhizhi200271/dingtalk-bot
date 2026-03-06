@@ -1,4 +1,99 @@
-/* === 动态漫制作系统 · HoloLake === */
+/* 场景管理栏样式 */
+.scene-manager {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    background: #1a1a2e;
+    border-bottom: 1px solid #333;
+    gap: 10px;
+}
+
+.scene-tabs {
+    display: flex;
+    gap: 5px;
+    flex: 1;
+}
+
+.scene-tab {
+    padding: 6px 12px;
+    background: #2d2d44;
+    border: 1px solid #444;
+    border-radius: 4px 4px 0 0;
+    color: #aaa;
+    cursor: pointer;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.scene-tab.active {
+    background: #4a4a6a;
+    color: #fff;
+    border-bottom-color: #4a4a6a;
+}
+
+.scene-tab .delete-btn {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #ff5555;
+    color: #fff;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.scene-tab:hover .delete-btn {
+    opacity: 1;
+}
+
+.btn-add-scene {
+    padding: 6px 12px;
+    background: #4a9eff;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.btn-add-scene:hover {
+    background: #3a8eef;
+}
+
+.save-indicator {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    color: #4caf50;
+}
+
+.save-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #4caf50;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+.save-indicator.saving {
+    color: #ff9800;
+}
+
+.save-indicator.saving .save-dot {
+    background: #ff9800;
+}/* === 动态漫制作系统 · HoloLake === */
 * {
     margin: 0;
     padding: 0;
