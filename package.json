@@ -1,0 +1,19 @@
+{
+  "name": "dingtalk-bot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "axios": "^1.13.6",
+    "crypto-js": "^4.2.0",
+    "dingtalk-jsapi": "^3.2.8",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1"
+  }
+}
