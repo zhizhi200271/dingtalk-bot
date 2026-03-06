@@ -1,0 +1,291 @@
+/* === 动态漫制作系统 · HoloLake === */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-dark: #1a1a2e;
+    --bg-panel: #16213e;
+    --bg-header: #0f3460;
+    --accent: #e94560;
+    --accent-hover: #ff6b81;
+    --text: #eee;
+    --text-muted: #999;
+    --border: #2a2a4a;
+    --track-bg: #2a2a4a;
+    --track-clip: #e94560;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg-dark);
+    color: var(--text);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Header */
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 16px;
+    background: var(--bg-header);
+    border-bottom: 1px solid var(--border);
+}
+
+.logo {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.header-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.btn {
+    padding: 6px 14px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: transparent;
+    color: var(--text);
+    cursor: pointer;
+    font-size: 13px;
+    transition: all 0.2s;
+}
+
+.btn:hover {
+    background: var(--border);
+}
+
+.btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+}
+
+.btn-primary:hover {
+    background: var(--accent-hover);
+}
+
+.btn-small {
+    padding: 4px 10px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: transparent;
+    color: var(--text);
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.btn-small:hover {
+    background: var(--border);
+}
+
+.btn-play {
+    background: var(--accent);
+    border-color: var(--accent);
+}
+
+/* Workspace */
+.workspace {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+/* Panels */
+.panel {
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
+}
+
+.panel-header {
+    padding: 10px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    background: rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.panel-body {
+    padding: 10px;
+    overflow-y: auto;
+}
+
+/* Assets Panel */
+.panel-assets {
+    width: 220px;
+    flex-shrink: 0;
+}
+
+.asset-category {
+    margin-bottom: 14px;
+}
+
+.asset-category h4 {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+    text-transform: uppercase;
+}
+
+.asset-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+}
+
+.asset-item {
+    padding: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+    text-align: center;
+    font-size: 12px;
+    cursor: grab;
+    transition: background 0.2s;
+}
+
+.asset-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Preview Panel */
+.panel-preview {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.preview-canvas {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #111;
+}
+
+.canvas-placeholder {
+    text-align: center;
+    color: var(--text-muted);
+}
+
+.canvas-placeholder p:first-child {
+    font-size: 48px;
+    margin-bottom: 8px;
+}
+
+.canvas-size {
+    font-size: 12px;
+    margin-top: 8px;
+    color: var(--border);
+}
+
+/* Layers Panel */
+.panel-layers {
+    width: 200px;
+    flex-shrink: 0;
+}
+
+.layer-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.layer-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.layer-item.active {
+    background: rgba(233, 69, 96, 0.2);
+    border: 1px solid var(--accent);
+}
+
+.layer-visibility, .layer-lock {
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.layer-name {
+    flex: 1;
+}
+
+.layer-actions {
+    display: flex;
+    gap: 6px;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid var(--border);
+}
+
+/* Timeline Panel */
+.panel-timeline {
+    height: 160px;
+    flex-shrink: 0;
+}
+
+.timeline-controls {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.timeline-time {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-left: 8px;
+}
+
+.timeline-tracks {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.track {
+    display: flex;
+    align-items: center;
+    height: 28px;
+}
+
+.track-label {
+    width: 60px;
+    font-size: 11px;
+    color: var(--text-muted);
+    text-align: right;
+    padding-right: 10px;
+    flex-shrink: 0;
+}
+
+.track-bar {
+    flex: 1;
+    height: 22px;
+    background: var(--track-bg);
+    border-radius: 4px;
+    position: relative;
+}
+
+.track-clip {
+    height: 100%;
+    background: var(--track-clip);
+    border-radius: 4px;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+}
+
+.track-clip:hover {
+    opacity: 1;
+}
