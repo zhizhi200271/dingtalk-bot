@@ -1,5 +1,5 @@
 /* 场景管理栏样式 */
-.scene-manager {
+-.scene-manager {
     display: flex;
     align-items: center;
     padding: 10px 15px;
@@ -461,3 +461,32 @@ body {
 .layer-item.dynamic {
   border-left: 3px solid var(--accent);
 }
+
+
+/* 导出工具栏样式 */
+.export-toolbar {
+    display: flex;
+    gap: 8px;
+    padding: 10px 15px;
+    background: #1a1a2e;
+    border-bottom: 1px solid #333;
+    align-items: center;
+}
+
+.btn-export {
+    padding: 6px 12px;
+    background: #2d2d44;
+    border: 1px solid #444;
+    border-radius: 4px;
+    color: #aaa;
+    cursor: pointer;
+    font-size: 13px;
+    transition: all 0.2s;
+}
+
+.btn-export:hover {
+    background: #3d3d5c;
+    color: #fff;
+    border-color: #666;
+}
+

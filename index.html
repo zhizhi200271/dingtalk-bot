@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>动态漫制作系统·HoloLake</title>
     <link rel="stylesheet" href="css/style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
 </head>
 <body>
     <header class="app-header">
@@ -57,6 +59,18 @@
                 <div class="scene-tabs" id="sceneTabs">
                     <!-- 场景Tab会动态生成 -->
                 </div>
+        <!-- 导出工具栏 -->
+        <div id="export-toolbar" class="export-toolbar">
+            <button onclick="exportAsImage()" class="btn-export" title="将当前场景保存为PNG图片">
+                📸 截图下载
+            </button>
+            <button onclick="exportAsJSON()" class="btn-export" title="导出所有场景数据">
+                📥 导出JSON
+            </button>
+            <button onclick="importFromJSON()" class="btn-export" title="从JSON文件导入场景数据">
+                📤 导入JSON
+            </button>
+        </div>
                 <button class="btn-add-scene" id="addSceneBtn">+ 新场景</button>
                 <div class="save-indicator" id="saveIndicator">
                     <span class="save-dot"></span>

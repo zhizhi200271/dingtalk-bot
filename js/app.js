@@ -429,3 +429,145 @@ function initEventListeners() {
 
 // ==================== 启动应用 ====================
 document.addEventListener('DOMContentLoaded', init);
+
+
+// ==================== 导出功能 ====================
+
+/**
+ * 截图下载 - 将当前场景保存为PNG图片
+ */
+function exportAsImage() {
+    const previewArea = document.getElementById('drop-zone');
+    if (!previewArea) {
+        alert('❌ 找不到画布区域');
+        return;
+    }
+    
+    // 使用 html2canvas 捕获画布
+    html2canvas(previewArea, {
+        backgroundColor: '#1a1a2e',
+        scale: 2 // 高清截图
+    }).then(canvas => {
+        // 转换为 PNG 并下载
+        const link = document.createElement('a');
+        const sceneName = getCurrentSceneName() || '场景';
+        const timestamp = new Date().toISOString().slice(0, 19).replace(/:/g, '-');
+        link.download = `comic-${sceneName}-${timestamp}.png`;
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+        
+        showToast('📸 截图已保存！');
+    }).catch(err => {
+        console.error('截图失败:', err);
+        alert('❌ 截图失败，请重试');
+    });
+}
+
+/**
+ * 导出 JSON - 导出所有场景数据
+ */
+function exportAsJSON() {
+    const data = {
+        scenes: scenes,
+        exportTime: new Date().toISOString(),
+        version: '1.0'
+    };
+    
+    const jsonStr = JSON.stringify(data, null, 2);
+    const blob = new Blob([jsonStr], { type: 'application/json' });
+    const link = document.createElement('a');
+    const timestamp = new Date().toISOString().slice(0, 19).replace(/:/g, '-');
+    
+    link.download = `dynamic-comic-data-${timestamp}.json`;
+    link.href = URL.createObjectURL(blob);
+    link.click();
+    
+    showToast('📥 数据已导出！');
+}
+
+/**
+ * 导入 JSON - 从文件恢复场景数据
+ */
+function importFromJSON() {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = '.json';
+    
+    input.onchange = function(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+        
+        const reader = new FileReader();
+        
+        reader.onload = function(event) {
+            try {
+                const data = JSON.parse(event.target.result);
+                
+                // 验证数据结构
+                if (!data.scenes || !Array.isArray(data.scenes)) {
+                    throw new Error('文件格式不正确');
+                }
+                
+                // 确认覆盖
+                if (!confirm('导入将覆盖当前所有数据，确定吗？')) {
+                    return;
+                }
+                
+                // 恢复数据
+                scenes = data.scenes;
+                saveToLocalStorage();
+                renderSceneTabs();
+                loadScene(scenes[0]?.id || 0);
+                
+                showToast('📤 数据已导入！');
+                
+            } catch (err) {
+                console.error('导入失败:', err);
+                alert('❌ 文件格式不正确');
+            }
+        };
+        
+        reader.readAsText(file);
+    };
+    
+    input.click();
+}
+
+/**
+ * 获取当前场景名称
+ */
+function getCurrentSceneName() {
+    const scene = scenes.find(s => s.id === currentSceneId);
+    return scene ? scene.name : '';
+}
+
+/**
+ * 显示提示消息
+ */
+function showToast(message) {
+    // 创建提示元素
+    const toast = document.createElement('div');
+    toast.textContent = message;
+    toast.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #2d2d44;
+        color: #fff;
+        padding: 12px 20px;
+        border-radius: 8px;
+        border: 1px solid #444;
+        z-index: 9999;
+        font-size: 14px;
+        animation: fadeIn 0.3s ease;
+    `;
+    
+    document.body.appendChild(toast);
+    
+    // 3秒后自动消失
+    setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transition = 'opacity 0.3s';
+        setTimeout(() => toast.remove(), 300);
+    }, 3000);
+}
